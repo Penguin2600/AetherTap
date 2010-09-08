@@ -1,0 +1,75 @@
+@ DEVICE PIC16F88,HS_OSC,MCLR_ON,LVP_OFF,WDT_OFF,PROTECT_OFF
+
+INCLUDE "modedefs.bas"
+
+DEFINE OSC 20 ' use precision OSC for reliable RS232
+
+CMCON = 0 ' no analog needed... for now.
+ADCON0 = 0
+ANSEL = 0
+
+RXBUFF var byte
+RadioBUFF var byte
+
+
+TX var PORTB.5
+RX var PORTB.4
+PTT var PORTB.3 
+CUP var PORTB.2 
+RadioTX var PORTB.1
+
+
+HIGH ptt 
+high CUP
+
+pause 50 'relax while everything setles down
+
+loop:
+SERin RX, N9600, RXBUFF
+
+if RXBUFF == "!" THEN
+    SEROUT TX, N9600, ["COMOK",13] 'Reply without doing anything  
+    goto loop  
+endif
+
+if RXBUFF == "Q" THEN
+    toggle ptt ' toggle the push to talk
+    SEROUT TX, N9600, ["PTTOK",13]
+    goto loop  
+endif
+
+if RXBUFF == "W" THEN
+    LOW CUP
+    pause 50 ' pulse the channel up line
+    high CUP
+    SEROUT TX, N9600, ["CUPOK",13]
+    goto loop  
+endif
+
+if RXBUFF == "S" THEN
+    LOW CUP
+    pause 1500 ' hold the channel up line low for scan
+    high CUP
+    SEROUT TX, N9600, ["SCNOK",13]
+    goto loop  
+endif
+
+if RXBUFF == "D" THEN
+    SEROUT TX, N9600, ["DATOK",13]
+    low ptt 'PUSH TO TALK
+getdata:
+    SERin RX, N9600, RadioBUFF 'get data
+    if Radiobuff == "X" Then
+        goto enddata
+    endif
+    SEROUT RadioTX, N9600, [RadioBUFF]
+    goto getdata 
+enddata: 
+    high ptt 
+    goto loop  
+endif
+
+SEROUT TX, N9600, ["ERROR",13]
+goto loop
+
+     

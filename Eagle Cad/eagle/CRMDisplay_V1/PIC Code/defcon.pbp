@@ -1,0 +1,193 @@
+@ DEVICE PIC16F88,HS_OSC,MCLR_ON,LVP_OFF,WDT_OFF,PROTECT_OFF
+
+INCLUDE "modedefs.bas"
+DEFINE OSC 20 ' use precision OSC for reliable RS232
+CMCON = 0 ' no analog needed... for now.
+ADCON0 = 0
+ANSEL = 0
+
+' Declare Variables
+    test var byte
+    Command var Byte
+    DigiTen var byte
+    DigiOne var byte
+    Digi Var Byte
+    Selector Var Byte
+    Counter Var word
+
+' Initialize Variables
+    Command=1
+    Selector=1
+    DigiTen=8
+    DigiOne=8
+    Counter=2001
+
+' Declare Constants
+    Piezo VAR PORTB.3
+    Tens var PORTA.0 
+    Ones var PORTA.1 
+    RX var PORTB.0
+    TX var PORTB.1
+    A var PORTB.4
+    D var PORTB.5
+    B var PORTB.6
+    C var PORTB.7 
+
+' Let me know you're alive
+    pause 50
+    serout TX, T9600,["Online"] 
+    freqout piezo, 100, 1250
+    freqout piezo, 100, 500
+    freqout piezo, 100, 1500
+    pause 50         
+
+LOOP:
+Counter=Counter+1
+    if counter > 2000 then
+        serout tx, T9600, ["Ping"]
+        serin RX, T9600, #Command
+        
+        select case Command
+        case 0
+            counter=0 
+        CASE 1 
+            SEROUT TX, T9600, ["Ping"]
+            counter=2001
+        CASE 2 
+            SERIN rx,T9600, #DigiTen
+            serin RX,T9600, #DigiOne
+            freqout piezo, 100, 500
+            freqout piezo, 100, 1500
+            counter=0
+        CASE 3 
+            SERIN rx,T9600, #DigiTen
+            serin RX,T9600, #DigiOne
+            freqout piezo, 100, 1250 
+            counter=0
+        CASE ELSE 
+            counter=0
+        END SELECT
+        
+    endif
+    
+High Tens
+    selector=1
+    call dodigit
+    pause 5
+Low Tens
+High Ones
+    selector=0
+    call dodigit
+    pause 5
+Low Ones
+goto loop
+
+dodigit:
+if selector=0 then
+    Digi=DigiOne
+else
+    Digi=DigiTen
+endif
+
+select case Digi
+  case 0
+    call zero
+  CASE 1 
+    call one
+  CASE 2 
+    call two
+  CASE 3 
+    call three
+  case 4
+    call four
+  CASE 5 
+    call five
+  CASE 6 
+    call six
+  CASE 7 
+    call seven
+  CASE 8 
+    call eight
+  CASE 9 
+    call nine
+  CASE ELSE 
+    return
+END SELECT
+return
+
+hi:
+high A
+high b 
+high c
+high d
+return
+
+zero:
+low A
+low b
+low C
+low D
+return  
+
+one:
+high A
+low b
+low C
+low D
+return    
+
+two:
+low A
+high b
+low C
+low D
+return  
+
+three:
+high A
+high b
+low C
+low D
+return  
+
+four:
+low A
+low b
+high C
+low D
+return  
+
+five:
+high A
+low b
+high C
+low D
+return  
+
+six:
+low A
+high b
+high C
+low D
+return  
+
+seven:
+high A
+high b
+high C
+low D
+return  
+
+eight:
+low A
+low b
+low C
+high D
+return  
+
+nine:
+high A
+low b
+low C
+high D
+return  

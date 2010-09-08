@@ -1,0 +1,63 @@
+***  Installation Started 02/09/2010 21:15  ***
+Title: Microchip Memory Disk Drive File System Installation
+Source: C:\Users\Penguin\Desktop\Microchip MDD File System 1.2.0 Installer.exe | 08-20-2008 | 13:44:50 | 1562601
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Help
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Help\MDDFS Library Help.chm | 08-20-2008 | 10:23:20 | | 374738 | 41a95b6c
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\Compiler.h | 05-28-2008 | 12:41:52 | | 5462 | 1d48f226
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\MDD File System-SD Data Logger.mcw | 08-20-2008 | 13:44:00 | | 1072640 | cf4787d8
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\CF-PMP.c | 08-19-2008 | 15:43:36 | | 10816 | 6a24030a
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Demonstration.c | 08-20-2008 | 09:57:34 | | 10229 | 3672992b
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDD File System-SD.mcw | 08-20-2008 | 13:42:42 | | 29184 | 440305e0
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDDFS-SD-PIC18.hex | 08-20-2008 | 13:42:00 | | 190609 | 366197e6
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDDFS-SD-PIC18.mcp | 08-20-2008 | 13:42:40 | | 2400 | 2d8d63d2
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDDFS-SD-PIC24.hex | 08-20-2008 | 13:41:38 | | 137593 | bedbe994
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDDFS-SD-PIC24.mcp | 08-20-2008 | 13:42:40 | | 2045 | 34f4423c
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDDFS-SD-PIC32.hex | 08-20-2008 | 13:42:18 | | 152486 | 85b5681e
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\MDDFS-SD-PIC32.mcp | 08-20-2008 | 13:42:40 | | 1988 | 5a2681d8
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic18f
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic18f\18f8722i.lkr | 06-20-2008 | 10:44:48 | | 2221 | 132f25bb
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic18f\Demonstration.c | 08-19-2008 | 15:27:44 | | 8556 | 44ae09bf
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic18f\FSconfig.h | 08-19-2008 | 15:29:36 | | 14104 | 82865c2a
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic18f\HardwareProfile.h | 08-19-2008 | 15:31:08 | | 27300 | df0e0ac2
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic24f
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic24f\FSconfig.h | 08-19-2008 | 13:09:56 | | 14105 | fe7acfd9
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic24f\HardwareProfile.h | 08-19-2008 | 13:26:36 | | 27310 | 8640f935
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic32
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic32\FSconfig.h | 08-19-2008 | 13:12:30 | | 14105 | fe7acfd9
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Card\Pic32\HardwareProfile.h | 08-19-2008 | 13:25:34 | | 27300 | df0e0ac2
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\FSconfig.h | 08-19-2008 | 14:29:26 | | 14107 | c6b61425
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\HardwareProfile.h | 08-19-2008 | 14:29:54 | | 27705 | ec0d8f0d
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\MDDFS-SD Data Logger-PIC24.hex | 08-20-2008 | 13:36:18 | | 182846 | 4ad976cb
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\MDDFS-SD Data Logger-PIC24.mcp | 08-20-2008 | 13:36:42 | | 2118 | b5a7cd2e
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\MDDFS-SD Data Logger-PIC32.hex | 08-20-2008 | 13:43:42 | | 231784 | 9656eefb
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\MDDFS-SD Data Logger-PIC32.mcp | 08-20-2008 | 13:43:58 | | 2105 | e4d7ef6a
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\MDD File System-SD Data Logger\sd_data_logger.c | 08-19-2008 | 15:33:48 | | 91300 | 88700323
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Common
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Common\uart2.c | 08-07-2008 | 09:12:50 | | 8335 | 78e0fbe2
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\GenericTypeDefs.h | 08-19-2008 | 16:30:00 | | 8025 | deefbbfd
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System\CF- Bit transaction.h | 08-19-2008 | 15:35:56 | | 5013 | 86aec41a
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System\CF-PMP.h | 08-19-2008 | 15:36:22 | | 5058 | ebb732d3
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System\FSDefs.h | 08-19-2008 | 15:38:06 | | 25937 | df424b46
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System\FSIO.h | 08-19-2008 | 15:40:12 | | 62652 | 87a7723c
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\PIC18 salloc
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\PIC18 salloc\salloc.c | 08-19-2008 | 15:42:50 | | 13071 | 6b27a973
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System\SD-SPI.h | 08-19-2008 | 15:42:14 | | 16253 | 1252cfb8
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\MDD File System\TEMPLATEFILE.h | 08-19-2008 | 15:42:20 | | 3500 | 1c68b641
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\PIC18 salloc
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\PIC18 salloc\salloc.h | 06-11-2007 | 09:00:42 | | 125 | e2331385
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\Include\uart2.h | 08-19-2008 | 16:30:18 | | 2488 | e8a1bdfd
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\SD-SPI.c | 08-19-2008 | 15:46:36 | | 43340 | e1da7402
+Made Dir: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\Documentation
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\Documentation\01045b.pdf | 05-06-2008 | 14:14:12 | | 614256 | 73cc7a5f
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\FSIO.c | 08-20-2008 | 13:34:42 | | 299616 | d851f1
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\FS Phys Interface Template.c | 08-19-2008 | 15:43:48 | | 14352 | 48e7f722
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\Documentation\Readme.pdf | 08-20-2008 | 10:14:36 | | 64835 | cef56123
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\Documentation\PICtail for SD and MMC Schematic.pdf | 04-10-2008 | 12:38:14 | | 72751 | 520787c8
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\Documentation\License Agreement.pdf | 08-19-2008 | 16:25:00 | | 51019 | ef5afc1b
+File Copy: C:\Users\Penguin\Documents\Microchip\Pic24\Ethernet Project\Microchip\MDD File System\CF-Bit transaction.c | 08-19-2008 | 15:43:28 | | 11975 | 994aff7b

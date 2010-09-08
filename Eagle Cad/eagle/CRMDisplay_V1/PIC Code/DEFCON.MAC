@@ -1,0 +1,164 @@
+
+	NOLIST
+; PICBASIC PRO(TM) Compiler 2.47, (c) 1998, 2006 microEngineering Labs, Inc. All Rights Reserved.  
+
+LABEL?L macro Label
+        RST?RP
+    ifdef PM_USED
+        LALL
+Label
+        XALL
+    else
+Label
+    endif
+    endm
+
+ADD?WCW macro Win, Cin, Wout
+    if (Wout == Win)
+      if (Cin == 1)
+        CHK?RP  Wout
+        incf    Wout, F
+        btfsc   STATUS, Z
+        incf    Wout + 1, F
+      else  
+        movlw   low (Cin)
+        CHK?RP  Wout
+        addwf   Wout, F
+        if (((Cin) >> 8) == 0)
+        btfsc   STATUS, C
+        incf    Wout + 1, F
+        else
+        movlw   (Cin) >> 8
+        btfsc   STATUS, C
+        addlw   1
+        addwf   Wout + 1, F
+        endif
+      endif
+    else
+        movlw   low (Cin)
+        CHK?RP  Win
+        addwf   Win, W
+        MOVE?AB Wout
+      if (((Cin) >> 8) == 0)
+        MOVE?BA Win + 1
+        btfsc   STATUS, C
+        addlw   1
+        MOVE?AB Wout + 1
+      else
+        movlw   (Cin) >> 8
+        btfsc   STATUS, C
+        addlw   1
+        CHK?RP  Win
+        addwf   Win + 1, W
+        MOVE?AB Wout + 1
+      endif
+    endif
+    endm
+
+CMPLE?WCL macro Win, Cin, Label
+        MOVE?WW Win, R0
+        MOVE?CB (Cin) >> 8, R1 + 1
+        MOVE?CA low (Cin)
+        L?CALL  CMPLE
+        BIT?GOTO 0, STATUS, Z, Label
+    endm
+CMPLE_USED = 1
+
+CMPNE?BCL macro Bin, Cin, Label
+    if (Cin < 100h)
+        CLRWDT?
+        MOVE?BA Bin
+        sublw   Cin
+        BIT?GOTO 0, STATUS, Z, Label
+    else
+        L?GOTO  Label
+    endif
+    endm
+
+ASM? macro
+        RST?RP
+    endm
+
+CALL?L macro Label
+        L?CALL  Label
+    endm
+
+ENDASM? macro
+    endm
+
+FREQOUT?C macro Cin
+        MOVE?CA high (Cin)
+        CHK?RP  R3
+        movwf   R3 + 1
+        movwf   R2 + 1
+        MOVE?CB low (Cin), R3
+        L?CALL  FREQOUT
+    endm
+FREQOUT_USED = 1
+
+FREQOUTPIN?T macro Regin, Bitin
+        BIT?R1  Regin, Bitin
+    endm
+
+FREQOUTTIME?C macro Cin
+        MOVE?CB low (Cin), RR2
+        MOVE?CB high (Cin), RM2
+    endm
+
+GOTO?L macro Label
+        L?GOTO  Label
+    endm
+
+HIGH?T macro Regin, Bitin
+        MOVE?CT 1, Regin, Bitin
+        MOVE?CT 0, ((Regin) + 80h), Bitin
+    endm
+
+LOW?T macro Regin, Bitin
+        MOVE?CT 0, Regin, Bitin
+        MOVE?CT 0, ((Regin) + 80h), Bitin
+    endm
+
+PAUSE?C macro Cin
+    if (high (Cin) == 0)
+        MOVE?CA Cin
+        L?CALL  PAUSE
+    else
+        MOVE?CB high (Cin), R1 + 1
+        MOVE?CA low (Cin)
+        L?CALL  PAUSEL
+    endif
+    endm
+PAUSE_USED = 1
+
+RETURN? macro
+    ifdef DEBUG_STACK
+        CHK?RP  DEBUG_STACK
+        decf    DEBUG_STACK, F
+    endif
+        RST?RP
+        return
+    endm
+
+SERIND?B macro Bout
+        L?CALL  SERINDEC
+        MOVE?AB Bout
+    endm
+SERINDEC_USED = 1
+
+SERMODE?C macro Cin
+        MOVE?CB Cin, GOP
+    endm
+
+SERPIN?T macro Regin, Bitin
+        BIT?R1  Regin, Bitin
+    endm
+
+SEROUT?C macro Cin
+        MOVE?CA Cin
+        L?CALL  SEROUT
+    endm
+SEROUT_USED = 1
+
+
+	LIST
