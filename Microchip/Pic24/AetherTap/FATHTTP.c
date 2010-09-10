@@ -363,11 +363,11 @@ static void HTTPProcess(HTTP_HANDLE h)
                 }
                 //ph->file = MPFSOpen(arg[0]);
    				// Open file 1 in read mode
-				FSFILE * filePointer;
-				filePointer = FSfopen ("DEBUG.TXT", "w"); 
+				//FSFILE * filePointer;
+				//filePointer = FSfopen ("DEBUG.TXT", "w"); 
 
-				FSfwrite (arg, 1, sizeof(arg), filePointer);
-				FSfclose (filePointer);
+				//FSfwrite (arg, 1, sizeof(arg), filePointer);
+				//FSfclose (filePointer);
 
    				ph->file = FSfopen ((void*)arg[0], "r");
 
@@ -389,12 +389,12 @@ static void HTTPProcess(HTTP_HANDLE h)
         case SM_HTTP_NOT_FOUND:
             if(TCPIsPutReady(ph->socket) >= 20u)
             {
-				BYTE i;
-				for(i = 0; i < MAX_HTTP_ARGS; i++)
-				{
-					TCPPutROMString(ph->socket, (ROM BYTE*)arg[i]);
-					TCPPutROMString(ph->socket, "-");
-				}
+				//BYTE i;
+				//for(i = 0; i < MAX_HTTP_ARGS; i++)
+				//{
+					//TCPPutROMString(ph->socket, (ROM BYTE*)arg[i]);
+					//TCPPutROMString(ph->socket, "-");
+				//}
 				TCPFlush(ph->socket);
 				TCPDisconnect(ph->socket);
 				ph->smHTTP = SM_HTTP_IDLE;
