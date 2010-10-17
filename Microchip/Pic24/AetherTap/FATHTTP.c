@@ -274,6 +274,23 @@ void HTTPServer(void)
         HTTPProcess(conn);
 }
 
+/*****************************************
+*
+*
+*******************************************/
+static void HTTPExecCmd(BYTE* arg[],BYTE argc)
+{
+ const char frameText = (char)*arg[2];
+ const char write[] = "w";
+ 
+     FSFILE * dynFile; 
+     dynFile = FSfopen("test", write);  
+     FSfwrite(frameText, sizeof(frameText), 1, dynFile); 
+     FSfclose(dynFile);
+ 
+}
+
+
 /*********************************************************************
  * Function:        static BOOL HTTPProcess(HTTP_HANDLE h)
  *
@@ -351,7 +368,7 @@ static void HTTPProcess(HTTP_HANDLE h)
                 if ( argc > 1u )
                 {
                     //Let main application handle this remote command.
-                    //HTTPExecCmd(&arg[0], argc);
+                    HTTPExecCmd(&arg[0], argc);
 
                     // Command handler must have modified arg[0] which now
                     // points to actual file that will be sent as a result of
@@ -361,13 +378,6 @@ static void HTTPProcess(HTTP_HANDLE h)
                     // file for remote command.
                     ph->fileType = HTTP_CGI;
                 }
-                //ph->file = MPFSOpen(arg[0]);
-   				// Open file 1 in read mode
-				//FSFILE * filePointer;
-				//filePointer = FSfopen ("DEBUG.TXT", "w"); 
-
-				//FSfwrite (arg, 1, sizeof(arg), filePointer);
-				//FSfclose (filePointer);
 
    				ph->file = FSfopen ((void*)arg[0], "r");
 
@@ -389,12 +399,12 @@ static void HTTPProcess(HTTP_HANDLE h)
         case SM_HTTP_NOT_FOUND:
             if(TCPIsPutReady(ph->socket) >= 20u)
             {
-				//BYTE i;
-				//for(i = 0; i < MAX_HTTP_ARGS; i++)
-				//{
-					//TCPPutROMString(ph->socket, (ROM BYTE*)arg[i]);
-					//TCPPutROMString(ph->socket, "-");
-				//}
+				BYTE i;
+				for(i = 0; i < MAX_HTTP_ARGS; i++)
+				{
+					TCPPutROMString(ph->socket, (ROM BYTE*)arg[i]);
+					TCPPutROMString(ph->socket, " ");
+				}
 				TCPFlush(ph->socket);
 				TCPDisconnect(ph->socket);
 				ph->smHTTP = SM_HTTP_IDLE;
@@ -458,11 +468,13 @@ static void HTTPProcess(HTTP_HANDLE h)
  *
  * Note:            None.
  ********************************************************************/
+
 static BOOL SendFile(HTTP_INFO* ph)
 {
     BYTE charCounter;
 	BYTE currentChar[2];
 	BYTE fileBuffer[8];
+
 	WORD txBufferSpace;
 
 	LED1_IO=1; // Light the SD Indicator
