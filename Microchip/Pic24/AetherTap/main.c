@@ -37,6 +37,7 @@ static void InitHardware(void);
 int main(void){
 
 	static TICK t = 0;
+	static DWORD dwLastIP = 0;
 	
 	InitHardware(); //setup hardware
 	UART1Init(51); 	// // 51 for 19200 Baud. // 103 for 9600 @ 32Mhz

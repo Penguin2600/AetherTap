@@ -119,6 +119,12 @@ public class Main extends Activity {
 			case KeyEvent.KEYCODE_DPAD_RIGHT:
 				Udp.sendArray("d",knownIP);
 				return true;
+			case KeyEvent.KEYCODE_1:
+				Udp.sendArray("1",knownIP);
+				return true;
+			case KeyEvent.KEYCODE_2:
+				Udp.sendArray("2",knownIP);
+				return true;
 			case KeyEvent.KEYCODE_DPAD_UP:
 				Udp.sendArray("w",knownIP);
 				return true;
