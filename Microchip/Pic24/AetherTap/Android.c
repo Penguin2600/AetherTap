@@ -63,6 +63,21 @@ void AndroidTask(void)
 					hval+=delta;
 					PololuAbsPos(0, hval);
 					break;
+				case '1':
+							LED1_IO ^= 1;
+							break;
+				case '2':
+							AUX0_IO ^= 1;
+							break;
+				case '3':
+							AUX1_IO ^= 1;
+							break;
+				case '4':
+							AUX2_IO ^= 1;
+							break;
+				case '5':
+							AUX3_IO ^= 1;
+							break;
 				default:
 					break;
 			}
