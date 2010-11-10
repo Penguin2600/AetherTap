@@ -1,28 +1,54 @@
 package bock.android.aethertap;
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.text.DecimalFormat;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorManager;
+import android.hardware.SensorEventListener;
+
 public class Main extends Activity {
+
 	TextView textDebug = null;
+	TextView textAccelx = null;
+	TextView textAccely = null;
+	TextView textAccelz = null;
+	TextView textMyIP = null;
+	TextView textNetmask = null;
+	TextView textRemoteIP = null;
+	InetAddress knownIPaddr = null;
 	udpHandler Udp = new udpHandler(this);
 	String knownIP = null;
+
+	private SensorManager sensorMgr;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		sensorMgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		sensorMgr.registerListener(accListener, sensorMgr
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+				SensorManager.SENSOR_DELAY_NORMAL);
+		
 		Layout();
 	}
 
+	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		Layout();
@@ -32,8 +58,23 @@ public class Main extends Activity {
 		setContentView(R.layout.main);
 		Button buttonListen = (Button) findViewById(R.id.buttonListen);
 		Button buttonProbe = (Button) findViewById(R.id.buttonProbe);
-		Button buttonTelnet = (Button) findViewById(R.id.buttonTelnet);
+		Button buttonP1 = (Button) findViewById(R.id.buttonP1);
+		Button buttonP2 = (Button) findViewById(R.id.buttonP2);
+		Button buttonP3 = (Button) findViewById(R.id.buttonP3);
+		Button buttonP4 = (Button) findViewById(R.id.buttonP4);
 		textDebug = (TextView) findViewById(R.id.textDebug);
+		textAccelx = (TextView) findViewById(R.id.textAccelx);
+		textAccely = (TextView) findViewById(R.id.textAccely);
+		textAccelz = (TextView) findViewById(R.id.textAccelz);
+		textNetmask = (TextView) findViewById(R.id.textNetmask);
+		textRemoteIP = (TextView) findViewById(R.id.textRemoteIP);
+		
+		try {
+			textNetmask.setText(Udp.getBroadcastAddress().toString().split("/")[1]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		textRemoteIP.setText("127.0.0.1");
 
 		buttonListen.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -45,9 +86,24 @@ public class Main extends Activity {
 				new DeviceProbeTask().execute();
 			}
 		});
-		buttonTelnet.setOnClickListener(new View.OnClickListener() {
+		buttonP1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-
+				Udp.sendArray("1", knownIP);
+			}
+		});
+		buttonP2.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Udp.sendArray("2", knownIP);
+			}
+		});
+		buttonP3.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Udp.sendArray("3", knownIP);
+			}
+		});
+		buttonP4.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Udp.sendArray("4", knownIP);
 			}
 		});
 	}
@@ -67,8 +123,9 @@ public class Main extends Activity {
 			return Udp.listenForDevice();
 		}
 
+		@Override
 		protected void onPostExecute(InetAddress result) {
-			knownIP=result.toString().split("/")[1];
+			knownIP = result.toString().split("/")[1];
 			createSocket();
 			dialog.dismiss();
 		}
@@ -89,73 +146,90 @@ public class Main extends Activity {
 			return Udp.probeForDevice();
 		}
 
+		@Override
 		protected void onPostExecute(InetAddress result) {
-			knownIP=result.toString().split("/")[1];
+			knownIP = result.toString().split("/")[1];
 			createSocket();
 			dialog.dismiss();
 		}
 
 	}
-	
+
 	private void createSocket() {
-		if (Udp.comSocket==null)
-		{
+		if (Udp.comSocket == null) {
 			Udp.openCom();
-			textDebug.setText("Active Device Found At "+knownIP);
+			textRemoteIP.setText(knownIP);
 		} else {
-			textDebug.setText("Ip Change To "+knownIP);
+			textRemoteIP.setText(knownIP);
 		}
 	}
-	
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (Udp.comSocket!=null) {
+		if (Udp.comSocket != null) {
 			switch (keyCode) {
-			case KeyEvent.KEYCODE_DPAD_DOWN:
-				Udp.sendArray("s",knownIP);
-				return true;
-			case KeyEvent.KEYCODE_DPAD_LEFT:
-				Udp.sendArray("a",knownIP);
-				return true;
-			case KeyEvent.KEYCODE_DPAD_RIGHT:
-				Udp.sendArray("d",knownIP);
-				return true;
-			case KeyEvent.KEYCODE_1:
-				Udp.sendArray("1",knownIP);
-				return true;
-			case KeyEvent.KEYCODE_2:
-				Udp.sendArray("2",knownIP);
-				return true;
 			case KeyEvent.KEYCODE_DPAD_UP:
-				Udp.sendArray("w",knownIP);
+				Udp.sendArray("1", knownIP);
 				return true;
 			}
 		}
-
 		return super.onKeyDown(keyCode, event);
 	}
 
+	private final SensorEventListener accListener = new SensorEventListener() {
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		}
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			
+			DecimalFormat df = new DecimalFormat("0.00");
+			
+			float x_val = event.values[0];
+			float y_val = event.values[1];
+			float z_val = event.values[2];
+
+			String x_v = df.format(x_val);
+			String y_v = df.format(y_val);
+			String z_v = df.format(z_val);
+			
+			textAccelx.setText("X Axis: "+x_v);
+			textAccely.setText("Y Axis: "+y_v);
+			textAccelz.setText("Z Axis: "+z_v);
+		}
+	};
+
+	@Override
 	protected void onStart() {
 		super.onStart();
 	}
 
+	@Override
 	protected void onRestart() {
 		super.onRestart();
 	}
 
+	@Override
 	protected void onResume() {
 		super.onResume();
 	}
 
+	@Override
 	protected void onPause() {
 		super.onPause();
 	}
 
+	@Override
 	protected void onStop() {
 		super.onStop();
+		sensorMgr.unregisterListener(accListener);
 	}
 
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		sensorMgr.unregisterListener(accListener);
+
 	}
 
 }

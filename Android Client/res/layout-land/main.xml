@@ -2,25 +2,104 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<TextView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:text="Aethertap Android Interface"
-		android:layout_gravity="center" android:textColor="#0099DD"
-		android:textSize="25sp" android:background="#000" android:textStyle="bold"
-		android:typeface="sans" android:id="@+id/textTitle"></TextView>
 
-	<Button android:layout_height="wrap_content" android:id="@+id/buttonProbe"
-		android:text="Probe For Device" android:layout_width="fill_parent"></Button>
 	<TableLayout android:id="@+id/TableLayout01"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"></TableLayout>
-	<Button android:layout_height="wrap_content" android:id="@+id/buttonListen"
-		android:text="Listen For Device" android:layout_width="fill_parent"></Button>
+		android:layout_width="fill_parent" android:background="#333"
+		android:layout_height="wrap_content" android:stretchColumns="1">
+		<TableRow>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text=": Announce Options :"
+				android:layout_gravity="left" android:textColor="#0099DD"
+				android:textSize="14sp" android:typeface="sans" android:id="@+id/textHead1"></TextView>
+		</TableRow>
+		<TableRow>
+			<Button android:id="@+id/buttonProbe" android:text="Probe For Device"
+				android:layout_width="600px" android:padding="3dip">
+			</Button>
+			<Button android:layout_height="wrap_content" android:id="@+id/buttonListen"
+				android:text="Listen For Device" android:layout_width="wrap_content"
+				android:padding="3dip">
+			</Button>
+		</TableRow>
+	</TableLayout>
 
-	<Button android:layout_height="wrap_content"
-		android:layout_width="fill_parent" android:text="Try Telnet"
-		android:id="@+id/buttonTelnet"></Button>
-	<ScrollView android:id="@+id/ScrollView01"
-		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView android:layout_height="fill_parent"
-			android:layout_width="fill_parent" android:id="@+id/textDebug"></TextView>
-	</ScrollView>
+	<TableLayout android:id="@+id/TableLayout03"
+		android:layout_width="fill_parent" android:background="#555"
+		android:layout_height="wrap_content" android:stretchColumns="1">
+		<TableRow>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text=": I/O Toggles :"
+				android:layout_gravity="left" android:textColor="#0099DD"
+				android:textSize="14sp" android:typeface="sans" android:id="@+id/textHead1"></TextView>
+		</TableRow>
+		<TableRow>
+			<Button android:id="@+id/buttonP1" android:text="Servo Control"
+				android:layout_width="300px" android:padding="3dip">
+			</Button>
+			<Button android:id="@+id/buttonP2" android:text="Port 2"
+				android:layout_width="180px" android:padding="3dip">
+			</Button>
+			<Button android:id="@+id/buttonP3" android:text="Port 3"
+				android:layout_width="180px" android:padding="3dip">
+			</Button>
+			<Button android:id="@+id/buttonP4" android:text="Port 4"
+				android:layout_width="180px" android:padding="3dip">
+			</Button>
+		</TableRow>
+	</TableLayout>
+
+	<TableLayout android:id="@+id/TableLayout02"
+		android:layout_width="fill_parent" android:background="#333"
+		android:layout_height="wrap_content" android:stretchColumns="1">
+		<TableRow android:layout_weight="1">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text=": Accelerometer Outputs :"
+				android:layout_gravity="left" android:textColor="#0099DD"
+				android:textSize="14sp" android:typeface="sans" android:id="@+id/textHead1"></TextView>
+		</TableRow>
+		<TableRow>
+			<TextView android:layout_height="fill_parent"
+				android:layout_width="200px" android:id="@+id/textAccelx"
+				android:padding="3dip" android:layout_gravity="center">
+			</TextView>
+			<TextView android:layout_height="fill_parent"
+				android:layout_width="200px" android:id="@+id/textAccely"
+				android:padding="3dip" android:layout_gravity="center">
+			</TextView>
+			<TextView android:layout_height="fill_parent"
+				android:layout_width="200px" android:id="@+id/textAccelz"
+				android:padding="3dip" android:layout_gravity="center">
+			</TextView>
+
+		</TableRow>
+	</TableLayout>
+	
+		<TableLayout android:id="@+id/TableLayout02"
+		android:layout_width="fill_parent" android:background="#555"
+		android:layout_height="wrap_content" android:stretchColumns="1">
+		<TableRow android:layout_weight="1">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text=": Network Info :"
+				android:layout_gravity="left" android:textColor="#0099DD"
+				android:textSize="14sp" android:typeface="sans" android:id="@+id/textHead1"></TextView>
+		</TableRow>
+		<TableRow>
+
+			<TextView android:layout_height="fill_parent"
+				android:layout_width="400px" android:id="@+id/textNetmask"
+				android:padding="3dip" android:layout_gravity="center">
+			</TextView>
+			<TextView android:layout_height="fill_parent"
+				android:layout_width="400px" android:id="@+id/textRemoteIP"
+				android:padding="3dip" android:layout_gravity="center">
+			</TextView>
+
+		</TableRow>
+	</TableLayout>
+
+	<TextView android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:id="@+id/textDebug"></TextView>
+			
+
+
 </LinearLayout>
