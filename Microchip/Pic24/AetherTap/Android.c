@@ -8,7 +8,10 @@ extern NODE_INFO remoteNode;
 
 unsigned short	hval=3000;
 unsigned short	vval=3000;
-static short delta = 50;
+BYTE	*Rhval;
+BYTE	*Rvval;
+static short staticdelta = 50;
+
 
 void AndroidTask(void)
 {
@@ -44,23 +47,27 @@ void AndroidTask(void)
 			
 			// See if this is a discovery query or reply
 			UDPGet(&i);
-			UDPDiscard();
 			switch(i)
 			{
+				case 'r':
+					UDPGetArray(Rhval,2);
+					UDPGetArray(Rvval,2);
+					PololuAbsPos(0, &Rhval);
+					PololuAbsPos(1, &Rvval);
 				case 'w':
-					vval+=delta;
+					vval+=staticdelta;
 					PololuAbsPos(1, vval);
 					break;
 				case 's':
-					vval-=delta;
+					vval-=staticdelta;
 					PololuAbsPos(1, vval);
 					break;
 				case 'a':
-					hval-=delta;
+					hval-=staticdelta;
 					PololuAbsPos(0, hval);
 					break;
 				case 'd':
-					hval+=delta;
+					hval+=staticdelta;
 					PololuAbsPos(0, hval);
 					break;
 				case '1':
@@ -81,9 +88,10 @@ void AndroidTask(void)
 				default:
 					break;
 			}
+			UDPDiscard();
 
 			// We received a discovery request, reply when we can
-			ANDROIDSM;
+			ANDROIDSM--;
 
 			// Change the destination to the unicast address of the last received packet
         	memcpy((void*)&UDPSocketInfo[ASocket].remoteNode, (const void*)&remoteNode, sizeof(remoteNode));
