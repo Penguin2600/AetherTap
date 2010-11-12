@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,8 @@ public class Main extends Activity {
 	InetAddress knownIPaddr = null;
 	udpHandler Udp = new udpHandler(this);
 	String knownIP = null;
-
+	short[] accelvals= new short[3];
+	
 	private SensorManager sensorMgr;
 
 	@Override
@@ -88,7 +90,13 @@ public class Main extends Activity {
 		});
 		buttonP1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Udp.sendArray("1", knownIP);
+				
+				char Xh = (char)(accelvals[0] & 0xff);
+				char Xl = (char)((accelvals[0] >> 8) & 0xff);
+				char Yh = (char)(accelvals[1] & 0xff);
+			    char Yl = (char)((accelvals[1] >> 8) & 0xff);
+
+				Udp.sendArray("r"+Xh+Xl+Yh+Yl, knownIP);
 			}
 		});
 		buttonP2.setOnClickListener(new View.OnClickListener() {
@@ -183,21 +191,23 @@ public class Main extends Activity {
 		@Override
 		public void onSensorChanged(SensorEvent event) {
 			
-			DecimalFormat df = new DecimalFormat("0.00");
+			DecimalFormat df = new DecimalFormat("0");
 			
-			float x_val = event.values[0];
-			float y_val = event.values[1];
-			float z_val = event.values[2];
-
-			String x_v = df.format(x_val);
-			String y_v = df.format(y_val);
-			String z_v = df.format(z_val);
+			for (int i=0; i<=2; i++){
+					accelvals[i] = (short) (((event.values[i]/(float)10)*2000)+2000);
+			}
+			
+			String x_v = df.format(accelvals[0]);
+			String y_v = df.format(accelvals[1]);
+			String z_v = df.format(accelvals[2]);
 			
 			textAccelx.setText("X Axis: "+x_v);
 			textAccely.setText("Y Axis: "+y_v);
 			textAccelz.setText("Z Axis: "+z_v);
+
 		}
 	};
+
 
 	@Override
 	protected void onStart() {

@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_24 (A) 8
+Microchip Technology Inc, vv3_24 (A) <
 
 Tool Name:
   d:\program files (x86)\microchip\mplab c30\bin\bin\..\bin/pic30-coff-ld.exe
@@ -135,21 +135,21 @@ Data Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_02d5d6204c956dca            0x800                   0           0x200  (512)
-_02d5d4d04c956dca            0xa00                   0           0x200  (512)
+_02edd6204cdc8b20            0x800                   0           0x200  (512)
+_02edd4d04cdc8b20            0xa00                   0           0x200  (512)
 .nbss                        0xc00                   0           0x348  (840)
 .ndata                       0xf48                   0            0x12  (18)
-.nbss                        0xf5a                   0            0x34  (52)
-.ndata                       0xf8e                   0             0x6  (6)
-.nbss                        0xf94                   0             0xc  (12)
-.ndata                       0xfa0                   0             0x4  (4)
-_02e7ae704cbb8309            0xfa4                   0             0x2  (2)
-.ndata                       0xfa6                   0             0x2  (2)
-_02d152a04cbb830f            0xfa8                   0             0x2  (2)
-.bss                         0xfaa                   0            0x88  (136)
-.data                       0x1032                   0             0xa  (10)
+.nbss                        0xf5a                   0            0x2c  (44)
+.ndata                       0xf86                   0             0x6  (6)
+.nbss                        0xf8c                   0            0x10  (16)
+.ndata                       0xf9c                   0             0x4  (4)
+_0304ae704cdc8b16            0xfa0                   0             0x2  (2)
+.ndata                       0xfa2                   0             0x2  (2)
+_02d852a04cdc8b1d            0xfa4                   0             0x2  (2)
+.bss                         0xfa6                   0            0x88  (136)
+.data                       0x102e                   0             0xa  (10)
 
-                        Total data memory used (bytes):          0x83c  (2108) 25%
+                        Total data memory used (bytes):          0x838  (2104) 25%
 
 
 Dynamic Memory Usage
@@ -157,9 +157,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x103c                              0x17c4  (6084)
+stack                       0x1038                              0x17c8  (6088)
 
-                        Maximum dynamic memory (bytes):         0x17c4  (6084)
+                        Maximum dynamic memory (bytes):         0x17c8  (6088)
 
 
 External Symbols in Data Memory (by address):
@@ -199,34 +199,30 @@ External Symbols in Data Memory (by address):
                     0x0f54                  _gNeedFATWrite
                     0x0f56                  _gLastFATSectorRead
                     0x0f5c                  _remoteNode
-                    0x0f82                  _Rvval
-                    0x0f84                  _Rhval
-                    0x0f8e                  _vval
-                    0x0f90                  _hval
-                    0x0f9c                  _MDD_SDSPI_finalLBA
-                    0x0fa0                  _DHCPClientInitializedOnce
-                    0x1032                  __Tls_setup__Randseed
-                    0x1034                  __Randseed
-                    0x1038                  __Tls_setup__Randinit
-                    0x103a                  __Randinit
+                    0x0f86                  _vval
+                    0x0f88                  _hval
+                    0x0f98                  _MDD_SDSPI_finalLBA
+                    0x0f9c                  _DHCPClientInitializedOnce
+                    0x102e                  __Tls_setup__Randseed
+                    0x1030                  __Randseed
+                    0x1034                  __Tls_setup__Randinit
+                    0x1036                  __Randinit
 
 External Symbols in Data Memory (by name):
 
                     0x0eae                  _AppConfig
-                    0x0fa0                  _DHCPClientInitializedOnce
+                    0x0f9c                  _DHCPClientInitializedOnce
                     0x0cde                  _FSerrno
                     0x0ce0                  _FatRootDirClusterValue
-                    0x0f9c                  _MDD_SDSPI_finalLBA
-                    0x0f84                  _Rhval
-                    0x0f82                  _Rvval
+                    0x0f98                  _MDD_SDSPI_finalLBA
                     0x0cda                  _TempClusterCalc
                     0x0e0e                  _UDPRxCount
                     0x0e14                  _UDPSocketInfo
                     0x0e10                  _UDPTxCount
-                    0x103a                  __Randinit
-                    0x1034                  __Randseed
-                    0x1038                  __Tls_setup__Randinit
-                    0x1032                  __Tls_setup__Randseed
+                    0x1036                  __Randinit
+                    0x1030                  __Randseed
+                    0x1034                  __Tls_setup__Randinit
+                    0x102e                  __Tls_setup__Randseed
                     0x0e12                  _activeUDPSocket
                     0x0c36                  _cwd
                     0x0f48                  _cwdptr
@@ -251,12 +247,12 @@ External Symbols in Data Memory (by name):
                     0x0cec                  _gTimeCrtTime
                     0x0ce4                  _gTimeWrtDate
                     0x0ce6                  _gTimeWrtTime
-                    0x0f90                  _hval
+                    0x0f88                  _hval
                     0x0f4c                  _nextClusterIsLast
                     0x0f4a                  _recache
                     0x0f5c                  _remoteNode
                     0x0ca2                  _tempCWDobj
-                    0x0f8e                  _vval
+                    0x0f86                  _vval
 
 External Symbols in Program Memory (by address):
 
@@ -1876,15 +1872,15 @@ __c30_signature
  __c30_signature
                   0x000186          0x6 d:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strchr.o)
 
-_02d5d6204c956dca
+_02edd6204cdc8b20
                     0x0800        0x200
- _02d5d6204c956dca
+ _02edd6204cdc8b20
                     0x0800        0x200 work\FSIO.o
                     0x0800                  gFATBuffer
 
-_02d5d4d04c956dca
+_02edd4d04cdc8b20
                     0x0a00        0x200
- _02d5d4d04c956dca
+ _02edd4d04cdc8b20
                     0x0a00        0x200 work\FSIO.o
                     0x0a00                  gDataBuffer
 
@@ -1933,54 +1929,52 @@ _02d5d4d04c956dca
                     0x0f54                  gNeedFATWrite
                     0x0f56                  gLastFATSectorRead
 
-.nbss               0x0f5a         0x34
+.nbss               0x0f5a         0x2c
  .nbss              0x0f5a          0xe work\StackTsk.o
                     0x0f5c                  remoteNode
  .nbss              0x0f68          0xc work\CustomTelnet.o
  .nbss              0x0f74          0xa work\Tick.o
- .nbss              0x0f7e          0x8 work\Android.o
-                    0x0f82                  Rvval
-                    0x0f84                  Rhval
- .nbss              0x0f86          0x8 work\ENC28J60.o
+ .nbss              0x0f7e          0x8 work\ENC28J60.o
 
-.ndata              0x0f8e          0x6
- .ndata             0x0f8e          0x6 work\Android.o
-                    0x0f8e                  vval
-                    0x0f90                  hval
+.ndata              0x0f86          0x6
+ .ndata             0x0f86          0x6 work\Android.o
+                    0x0f86                  vval
+                    0x0f88                  hval
 
-.nbss               0x0f94          0xc
- .nbss              0x0f94          0x4 work\Announce.o
- .nbss              0x0f98          0x4 work\IP.o
- .nbss              0x0f9c          0x4 work\SD-SPI.o
-                    0x0f9c                  MDD_SDSPI_finalLBA
+.nbss               0x0f8c         0x10
+ .nbss              0x0f8c          0x4 work\Android.o
+ .nbss              0x0f90          0x4 work\Announce.o
+ .nbss              0x0f94          0x4 work\IP.o
+ .nbss              0x0f98          0x4 work\SD-SPI.o
+                    0x0f98                  MDD_SDSPI_finalLBA
 
-.ndata              0x0fa0          0x4
- .ndata             0x0fa0          0x2 work\DHCP.o
-                    0x0fa0                  DHCPClientInitializedOnce
- .ndata             0x0fa2          0x2 work\TCP.o
+.ndata              0x0f9c          0x4
+ .ndata             0x0f9c          0x2 work\DHCP.o
+                    0x0f9c                  DHCPClientInitializedOnce
+ .ndata             0x0f9e          0x2 work\TCP.o
 
-_02e7ae704cbb8309
+_0304ae704cdc8b16
+                    0x0fa0          0x2
+ _0304ae704cdc8b16
+                    0x0fa0          0x2 work\TCP.o
+
+.ndata              0x0fa2          0x2
+ .ndata             0x0fa2          0x2 work\UDP.o
+
+_02d852a04cdc8b1d
                     0x0fa4          0x2
- _02e7ae704cbb8309
-                    0x0fa4          0x2 work\TCP.o
+ _02d852a04cdc8b1d
+                    0x0fa4          0x2 work\UDP.o
 
-.ndata              0x0fa6          0x2
- .ndata             0x0fa6          0x2 work\UDP.o
+.bss                0x0fa6         0x88
+ .bss               0x0fa6         0x88 d:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(rand.o)
 
-_02d152a04cbb830f
-                    0x0fa8          0x2
- _02d152a04cbb830f
-                    0x0fa8          0x2 work\UDP.o
-
-.bss                0x0faa         0x88
- .bss               0x0faa         0x88 d:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(rand.o)
-
-.data               0x1032          0xa
- .data              0x1032          0xa d:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(rand.o)
-                    0x1032                  _Tls_setup__Randseed
-                    0x1034                  _Randseed
-                    0x1038                  _Tls_setup__Randinit
-                    0x103a                  _Randinit
+.data               0x102e          0xa
+ .data              0x102e          0xa d:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(rand.o)
+                    0x102e                  _Tls_setup__Randseed
+                    0x1030                  _Randseed
+                    0x1034                  _Tls_setup__Randinit
+                    0x1036                  _Randinit
 
 .const              0x864a        0x3aa load address 0x00064a  
  .const             0x864a        0x1bc work\FATHTTP.o

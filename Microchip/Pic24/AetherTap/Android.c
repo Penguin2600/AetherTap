@@ -6,10 +6,8 @@
 
 extern NODE_INFO remoteNode;
 
-unsigned short	hval=3000;
-unsigned short	vval=3000;
-BYTE	*Rhval;
-BYTE	*Rvval;
+signed short	hval=3000;
+signed short	vval=3000;
 static short staticdelta = 50;
 
 
@@ -50,10 +48,10 @@ void AndroidTask(void)
 			switch(i)
 			{
 				case 'r':
-					UDPGetArray(Rhval,2);
-					UDPGetArray(Rvval,2);
-					PololuAbsPos(0, &Rhval);
-					PololuAbsPos(1, &Rvval);
+					UDPGetArray(&hval,2);
+					PololuAbsPos(0, hval);
+					UDPGetArray(&vval,2);
+					PololuAbsPos(1, vval);
 				case 'w':
 					vval+=staticdelta;
 					PololuAbsPos(1, vval);
@@ -70,24 +68,24 @@ void AndroidTask(void)
 					hval+=staticdelta;
 					PololuAbsPos(0, hval);
 					break;
-				case '1':
+				case '0':
 							LED1_IO ^= 1;
 							break;
-				case '2':
+				case '1':
 							AUX0_IO ^= 1;
 							break;
-				case '3':
+				case '2':
 							AUX1_IO ^= 1;
 							break;
-				case '4':
+				case '3':
 							AUX2_IO ^= 1;
 							break;
-				case '5':
+				case '4':
 							AUX3_IO ^= 1;
 							break;
 				default:
 					break;
-			}
+			}	
 			UDPDiscard();
 
 			// We received a discovery request, reply when we can
