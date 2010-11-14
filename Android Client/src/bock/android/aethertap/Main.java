@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -33,20 +32,24 @@ public class Main extends Activity {
 	InetAddress knownIPaddr = null;
 	udpHandler Udp = new udpHandler(this);
 	String knownIP = null;
-	short[] accelvals= new short[3];
 	
+	int[] accelvals = new int[3];
+	int[] x_vals = new int[6];
+	int[] y_vals = new int[6];
+	boolean servosOn = false;
+
 	private SensorManager sensorMgr;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		sensorMgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		sensorMgr.registerListener(accListener, sensorMgr
 				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_NORMAL);
-		
+				SensorManager.SENSOR_DELAY_FASTEST);
+
 		Layout();
 	}
 
@@ -70,9 +73,10 @@ public class Main extends Activity {
 		textAccelz = (TextView) findViewById(R.id.textAccelz);
 		textNetmask = (TextView) findViewById(R.id.textNetmask);
 		textRemoteIP = (TextView) findViewById(R.id.textRemoteIP);
-		
+
 		try {
-			textNetmask.setText(Udp.getBroadcastAddress().toString().split("/")[1]);
+			textNetmask
+					.setText(Udp.getBroadcastAddress().toString().split("/")[1]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -90,28 +94,22 @@ public class Main extends Activity {
 		});
 		buttonP1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				
-				char Xh = (char)(accelvals[0] & 0xff);
-				char Xl = (char)((accelvals[0] >> 8) & 0xff);
-				char Yh = (char)(accelvals[1] & 0xff);
-			    char Yl = (char)((accelvals[1] >> 8) & 0xff);
-
-				Udp.sendArray("r"+Xh+Xl+Yh+Yl, knownIP);
+				servosOn = !servosOn;
 			}
 		});
 		buttonP2.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Udp.sendArray("2", knownIP);
+				Udp.sendString("2", knownIP);
 			}
 		});
 		buttonP3.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Udp.sendArray("3", knownIP);
+				Udp.sendString("3", knownIP);
 			}
 		});
 		buttonP4.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Udp.sendArray("4", knownIP);
+				Udp.sendString("4", knownIP);
 			}
 		});
 	}
@@ -177,7 +175,7 @@ public class Main extends Activity {
 		if (Udp.comSocket != null) {
 			switch (keyCode) {
 			case KeyEvent.KEYCODE_DPAD_UP:
-				Udp.sendArray("1", knownIP);
+				Udp.sendString("1", knownIP);
 				return true;
 			}
 		}
@@ -188,26 +186,49 @@ public class Main extends Activity {
 		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
+
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			
+
 			DecimalFormat df = new DecimalFormat("0");
-			
-			for (int i=0; i<=2; i++){
-					accelvals[i] = (short) (((event.values[i]/(float)10)*2000)+2000);
+
+			for (int i = 0; i <= 2; i++) {
+				accelvals[i] = (short) ((event.values[i] / (float) 10) * 1000 + 3000);
 			}
-			
+
 			String x_v = df.format(accelvals[0]);
 			String y_v = df.format(accelvals[1]);
 			String z_v = df.format(accelvals[2]);
+
+			textAccelx.setText("X Axis: " + x_v);
+			textAccely.setText("Y Axis: " + y_v);
+			textAccelz.setText("Z Axis: " + z_v);
+
+			x_vals[5] = accelvals[0];
+			for (int i = 0; i <= 4; i++) {
+				x_vals[i] = x_vals[i + 1];
+			}
+			y_vals[5] = accelvals[1];
+			for (int i = 0; i <= 4; i++) {
+				y_vals[i] = y_vals[i + 1];
+			}
 			
-			textAccelx.setText("X Axis: "+x_v);
-			textAccely.setText("Y Axis: "+y_v);
-			textAccelz.setText("Z Axis: "+z_v);
+			int y_now = 0;
+			for (int i = 0; i <= 5; i++) {
+				y_now += y_vals[i];
+			}
+			int x_now = 0;
+			for (int i = 0; i <= 5; i++) {
+				x_now += x_vals[i];
+			}
+			
+
+			if (servosOn) {
+				Udp.servoVals(x_now/6, y_now/6, knownIP);
+			}
 
 		}
 	};
-
 
 	@Override
 	protected void onStart() {

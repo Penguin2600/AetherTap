@@ -6,8 +6,8 @@
 
 extern NODE_INFO remoteNode;
 
-signed short	hval=3000;
-signed short	vval=3000;
+unsigned short	hval=3000;
+unsigned short	vval=3000;
 static short staticdelta = 50;
 
 
@@ -16,8 +16,6 @@ void AndroidTask(void)
 	static enum {
 		ANDROID_HOME = 0,
 		ANDROID_LISTEN,
-		ANDROID_REQUEST_RECEIVED,
-		ANDROID_DISABLED
 	} ANDROIDSM = ANDROID_HOME;
 
 	static UDP_SOCKET	ASocket;
@@ -41,41 +39,27 @@ void AndroidTask(void)
 		case ANDROID_LISTEN:
 			// Do nothing if no data is waiting
 			if(!UDPIsGetReady(ASocket))
+				UDPDiscard();
 				return;
-			
 			// See if this is a discovery query or reply
 			UDPGet(&i);
 			switch(i)
 			{
 				case 'r':
-					UDPGetArray(&hval,2);
-					PololuAbsPos(0, hval);
-					UDPGetArray(&vval,2);
-					PololuAbsPos(1, vval);
-				case 'w':
-					vval+=staticdelta;
-					PololuAbsPos(1, vval);
-					break;
-				case 's':
-					vval-=staticdelta;
-					PololuAbsPos(1, vval);
-					break;
-				case 'a':
-					hval-=staticdelta;
-					PololuAbsPos(0, hval);
-					break;
-				case 'd':
-					hval+=staticdelta;
-					PololuAbsPos(0, hval);
-					break;
+						UDPGetArray(&hval,2);
+						UDPGetArray(&vval,2);
+						UDPDiscard();
+						PololuAbsPos(0, hval);
+						PololuAbsPos(1, vval);
+						break;
 				case '0':
 							LED1_IO ^= 1;
 							break;
 				case '1':
-							AUX0_IO ^= 1;
+							LED1_IO ^= 1;
 							break;
 				case '2':
-							AUX1_IO ^= 1;
+							LED1_IO ^= 1;
 							break;
 				case '3':
 							AUX2_IO ^= 1;
@@ -84,43 +68,13 @@ void AndroidTask(void)
 							AUX3_IO ^= 1;
 							break;
 				default:
+					UDPDiscard();
 					break;
 			}	
 			UDPDiscard();
-
-			// We received a discovery request, reply when we can
-			ANDROIDSM--;
-
-			// Change the destination to the unicast address of the last received packet
-        	memcpy((void*)&UDPSocketInfo[ASocket].remoteNode, (const void*)&remoteNode, sizeof(remoteNode));
 			
-			// No break needed.  If we get down here, we are now ready for the DISCOVERY_REQUEST_RECEIVED state
 
-		case ANDROID_REQUEST_RECEIVED:
-			if(!UDPIsPutReady(ASocket))
-				return;
-
-			// Begin sending our MAC address in human readable form.
-			// The MAC address theoretically could be obtained from the 
-			// packet header when the computer receives our UDP packet, 
-			// however, in practice, the OS will abstract away the useful
-			// information and it would be difficult to obtain.  It also 
-			// would be lost if this broadcast packet were forwarded by a
-			// router to a different portion of the network (note that 
-			// broadcasts are normally not forwarded by routers).
-			//UDPPutArray((BYTE*)AppConfig.NetBIOSName, sizeof(AppConfig.NetBIOSName)-1);
-			UDPPut('\r');
-			UDPPut(i);
-
-			// Send the packet
-			UDPFlush();
-
-			// Listen for other discovery requests
 			ANDROIDSM = ANDROID_LISTEN;
-			break;
-
-		case ANDROID_DISABLED:
-			break;
 	}	
 
 }

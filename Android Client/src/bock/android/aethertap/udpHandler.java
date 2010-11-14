@@ -5,6 +5,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 import android.content.Context;
 import android.net.DhcpInfo;
@@ -79,7 +81,7 @@ public class udpHandler {
 		comSocket.close();
 	}
 
-	protected void sendArray(String data, String dst) {
+	protected void sendString(String data, String dst) {
 		try {
 			InetAddress Destination = InetAddress.getByName(dst);
 			comSocket.setBroadcast(false);
@@ -89,6 +91,64 @@ public class udpHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	protected void sendArray(byte[] data, String dst) {
+		try {
+			InetAddress Destination = InetAddress.getByName(dst);
+			comSocket.setBroadcast(false);
+			DatagramPacket packet = new DatagramPacket(data, data.length,
+					Destination, COM_PORT);
+			comSocket.send(packet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public byte[] intToByteArray(int intValue) {
+
+		ByteBuffer b = ByteBuffer.allocate(4);
+		b.order(ByteOrder.LITTLE_ENDIAN);
+		b.putInt(intValue);
+		byte[] result = b.array();
+		return result;
+
+	}
+
+
+	private int bytesToInt(byte[] intBytes) {
+		ByteBuffer bb = ByteBuffer.wrap(intBytes);
+		return bb.getInt();
+	}
+
+	public byte[] reverseArray(byte[] arr)
+
+	{
+		int left = 0;
+		int right = arr.length - 1;
+		while (left < right) {
+			byte temp = arr[left];
+			arr[left] = arr[right];
+			arr[right] = temp;
+			left++;
+			right--;
+		}
+		return arr;
+	}
+
+	public void servoVals(int h, int v, String knownIP) {
+		byte[] r = intToByteArray('r');
+		byte[] hBA = intToByteArray(h);
+		byte[] vBA = intToByteArray(v);
+		byte[] data = new byte[5];
+		
+		data[0]=r[0];
+		data[1]=hBA[0];
+		data[2]=hBA[1];
+		data[3]=vBA[0];
+		data[4]=vBA[1];
+
+		sendArray(data, knownIP);
 	}
 
 }
