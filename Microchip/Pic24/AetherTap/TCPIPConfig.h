@@ -50,7 +50,7 @@
 #define MY_DEFAULT_IP_ADDR_BYTE1        (192ul)
 #define MY_DEFAULT_IP_ADDR_BYTE2        (168ul)
 #define MY_DEFAULT_IP_ADDR_BYTE3        (0ul)
-#define MY_DEFAULT_IP_ADDR_BYTE4        (2ul)
+#define MY_DEFAULT_IP_ADDR_BYTE4        (122ul)
 
 #define MY_DEFAULT_MASK_BYTE1           (255ul)
 #define MY_DEFAULT_MASK_BYTE2           (255ul)
@@ -122,7 +122,7 @@
 	#define MAX_HTTP_CONNECTIONS	(2u)
 
 //we don't use this, but it's needed to prevent compiler errors
-#define MAX_UDP_SOCKETS     (10u) 
+#define MAX_UDP_SOCKETS     (20u) 
 #define UDP_USE_TX_CHECKSUM		
 
 

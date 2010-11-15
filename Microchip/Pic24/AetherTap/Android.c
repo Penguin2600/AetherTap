@@ -8,8 +8,6 @@ extern NODE_INFO remoteNode;
 
 unsigned short	hval=3000;
 unsigned short	vval=3000;
-static short staticdelta = 50;
-
 
 void AndroidTask(void)
 {
@@ -39,7 +37,6 @@ void AndroidTask(void)
 		case ANDROID_LISTEN:
 			// Do nothing if no data is waiting
 			if(!UDPIsGetReady(ASocket))
-				UDPDiscard();
 				return;
 			// See if this is a discovery query or reply
 			UDPGet(&i);
@@ -48,9 +45,9 @@ void AndroidTask(void)
 				case 'r':
 						UDPGetArray(&hval,2);
 						UDPGetArray(&vval,2);
-						UDPDiscard();
 						PololuAbsPos(0, hval);
 						PololuAbsPos(1, vval);
+						UDPDiscard();
 						break;
 				case '0':
 							LED1_IO ^= 1;
@@ -68,12 +65,9 @@ void AndroidTask(void)
 							AUX3_IO ^= 1;
 							break;
 				default:
-					UDPDiscard();
 					break;
 			}	
-			UDPDiscard();
-			
-
+			UDPDiscard();	
 			ANDROIDSM = ANDROID_LISTEN;
 	}	
 
