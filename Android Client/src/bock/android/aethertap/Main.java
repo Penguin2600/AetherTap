@@ -34,8 +34,8 @@ public class Main extends Activity {
 	String knownIP = null;
 	
 	int[] accelvals = new int[3];
-	int[] x_vals = new int[6];
-	int[] y_vals = new int[6];
+	int[] x_vals = new int[10];
+	int[] y_vals = new int[10];
 	boolean servosOn = false;
 
 	private SensorManager sensorMgr;
@@ -195,6 +195,8 @@ public class Main extends Activity {
 			for (int i = 0; i <= 2; i++) {
 				accelvals[i] = (short) ((event.values[i] / (float) 10) * 1000 + 3000);
 			}
+			//invert vertical axis
+			accelvals[0] = (short) (((event.values[0]*-1) / (float) 10) * 1000 + 3000);
 
 			String x_v = df.format(accelvals[0]);
 			String y_v = df.format(accelvals[1]);
@@ -204,27 +206,27 @@ public class Main extends Activity {
 			textAccely.setText("Y Axis: " + y_v);
 			textAccelz.setText("Z Axis: " + z_v);
 
-			x_vals[5] = accelvals[0];
-			for (int i = 0; i <= 4; i++) {
+			x_vals[9] = accelvals[0];
+			for (int i = 0; i <= 8; i++) {
 				x_vals[i] = x_vals[i + 1];
 			}
-			y_vals[5] = accelvals[1];
-			for (int i = 0; i <= 4; i++) {
+			y_vals[9] = accelvals[1];
+			for (int i = 0; i <= 8; i++) {
 				y_vals[i] = y_vals[i + 1];
 			}
 			
 			int y_now = 0;
-			for (int i = 0; i <= 5; i++) {
+			for (int i = 0; i <= 9; i++) {
 				y_now += y_vals[i];
 			}
 			int x_now = 0;
-			for (int i = 0; i <= 5; i++) {
+			for (int i = 0; i <= 9; i++) {
 				x_now += x_vals[i];
 			}
 			
 
 			if (servosOn) {
-				Udp.servoVals(x_now/6, y_now/6, knownIP);
+				Udp.servoVals(x_now/10, y_now/10, knownIP);
 			}
 
 		}
